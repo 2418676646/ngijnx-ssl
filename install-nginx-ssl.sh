@@ -48,22 +48,57 @@ server {
 }
 EOF
 
-# 创建伪装首页
+# 创建伪装首页（动态时间显示，美观UI）
 echo "📄 生成伪装首页 HTML..."
 sudo bash -c "cat > /var/www/html/index.html" <<'HTML'
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Nginx Landing Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: sans-serif; background: #f9f9f9; text-align: center; margin-top: 10%; }
-        h1 { color: #333; }
+        body {
+            background: #f0f2f5;
+            font-family: "Segoe UI", Roboto, sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5em;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        #time {
+            margin-top: 1em;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007acc;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to Nginx Server</h1>
-    <p>This server is running normally. Please contact the administrator if you have any questions.</p>
+    <h1>Welcome to the Server</h1>
+    <p>This server is running normally.</p>
+    <div id="time">Loading time...</div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString();
+            document.getElementById('time').textContent = timeString;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
 </body>
 </html>
 HTML
