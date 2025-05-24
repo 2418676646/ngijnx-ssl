@@ -6,3 +6,12 @@
 ✅ 配置 Nginx 开启 HTTPS（强制跳转）
 ✅ 自动生成简单首页 HTML 伪装模板
 ✅ 重载并启动 nginx
+
+
+
+给予执行权限：
+chmod +x install-nginx-ssl.sh
+
+ 
+#执行脚本：
+sudo ./install-nginx-ssl.sh
